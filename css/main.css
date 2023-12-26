@@ -1,0 +1,457 @@
+*{
+    box-sizing: border-box;
+}
+:root{
+    --main-color: #222 ;
+    --main-size: 4px;
+    --main-background-color: #f8f8f8;
+}
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+}
+.container{
+    padding-left: 10px;
+    margin-left: auto;
+    padding-right: 10px;
+    margin-right: auto;
+    padding-top: 20px;
+}
+@media(min-width: 768px){
+    .container{
+        width: 750px;
+    }
+}
+@media(min-width: 992px){
+    .container{
+        width: 970px;
+    }
+}
+@media(min-width: 1200px){
+    .container{
+        width: 1170px;
+    }
+}
+.line{
+    width: 100%;
+    height: var(--main-size);
+    top: 0;
+    left: 0;
+    z-index: 999999;
+    background-color: #009688;
+}
+@media(max-width: 767px){
+    .line{
+        margin-bottom: 15px;
+    }
+}
+.row{
+    display: flex;
+}
+@media(max-width: 970px){
+    .row{
+        flex-direction: column;
+    }
+}
+hr{
+    border: 1px solid #eee;
+}
+.game-info{
+    display: flex;
+}
+.game-info .game-name{
+    flex: 1;
+    color: #009688;
+}
+.game-info .category{
+    flex: 1;
+    text-align: right;
+    color: #009688;
+}
+.game-info .category span{
+    text-transform: capitalize;
+    color: #e91e63;
+    font-weight: bold;
+}
+@media(max-width: 767px){
+    .game-info .category span{
+        font-size: 14px;
+    }
+}
+.hangman-draw{
+    flex: 1;
+    background-color: var(--main-background-color);
+    padding: 20px;
+    height: 324px;
+}
+@media(max-width: 970px){
+    .hangman-draw{
+        min-height: 324px;
+    }
+}
+.hangman-draw .the-draw{
+    width: 60px; 
+    height: 280px;
+    border-bottom: var(--main-size) solid var(--main-color);
+    position: relative;
+    margin: auto;
+    left: -60px;
+    display: none;
+}
+@media(max-width: 970px){
+    .hangman-draw .the-draw{
+        right: 20px;
+    }
+}
+.hangman-draw .the-stand{
+    position: absolute;
+    width: var(--main-size);
+    background-color: var(--main-color);
+    height: 100%;
+    left: 50%;
+    margin-left: -2px;
+    display: none;
+}
+.hangman-draw .the-hang{
+    display: none;
+}
+.hangman-draw .the-hang::before{
+    content: "";
+    position: absolute;
+    height: var(--main-size);
+    background-color: var(--main-color);
+    width: 100px;
+    left: 30px;
+    top: 15px;
+}
+.hangman-draw .the-hang::after{
+    content: "";
+    position: absolute;
+    width: var(--main-size);
+    height: 30px;
+    background-color: var(--main-color);
+    left: 130px;
+    top: 15px;
+}
+.hangman-draw .the-rope{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    position: absolute;
+    left: 95px;
+    top: 45px;
+    border: var(--main-size) dashed var(--main-color);
+    display: none;
+}
+.hangman-draw .the-man .head{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: var(--main-size) solid var(--main-color);
+    position: absolute;
+    left: 105px;
+    top: 55px;
+    display: none;
+}
+.hangman-draw .the-man .body{
+    position: absolute;
+    background-color: var(--main-color);
+    width: var(--main-size);
+    height: 110px;
+    top: 102px;
+    left: 130px;
+    display: none;
+}
+.hangman-draw .the-man .hands{
+    display: none;
+}
+.hangman-draw .the-man .hands::before{
+    left: 85px;
+    transform: rotate(-30deg);
+}
+.hangman-draw .the-man .hands::after{
+    left: 130px;
+    transform: rotate(30deg);
+}
+.hangman-draw .the-man .hands::before,
+.hangman-draw .the-man .hands::after{
+    content: "";
+    width: 50px;
+    position: absolute;
+    height: var(--main-size);
+    background-color: var(--main-color);
+    top: 140px;
+}
+.hangman-draw .the-man .legs{
+    display: none;
+}
+.hangman-draw .the-man .legs::before{
+    left: 85px;
+    transform: rotate(-30deg);
+}
+.hangman-draw .the-man .legs::after{
+    left: 130px;
+    transform: rotate(30deg);
+}
+.hangman-draw .the-man .legs::before,
+.hangman-draw .the-man .legs::after{
+    content: "";
+    width: 50px;
+    position: absolute;
+    height: var(--main-size);
+    background-color: var(--main-color);
+    top: 220px;
+}
+.hangman-draw.wrong-1 .the-draw{
+    display: block;
+}
+.hangman-draw.wrong-2 .the-stand{
+    display: block;
+}
+.hangman-draw.wrong-3 .the-hang{
+    display: block;
+}
+.hangman-draw.wrong-4 .the-rope{
+    display: block;
+}
+.hangman-draw.wrong-5 .head{
+    display: block;
+}
+.hangman-draw.wrong-6 .body{
+    display: block;
+}
+.hangman-draw.wrong-7 .hands{
+    display: block;
+}
+.hangman-draw.wrong-8 .legs{
+    display: block;
+}
+.letters{
+    flex: 1;
+    padding: 15px;
+    text-align: center;
+}
+.letters.finished{
+    pointer-events: none;
+}
+.letters .letter-box{
+    width: 55px;
+    height: 55px;
+    display: inline-block;
+    background-color: #009688;
+    color: #fff;
+    font-size: 24px;
+    margin-right: 10px;
+    line-height: 55px;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+@media(max-width: 970px){
+    .letters .letter-box{
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        font-size: 20px;
+    }
+}
+@media(max-width: 767px){
+    .letters .letter-box{
+        width: 35px;
+        height: 35px;
+        font-size: 14px;
+        line-height: 35px;
+    }
+}
+.letters .letter-box.clicked{
+    background-color: #ccc;
+    opacity: 0,2;
+    pointer-events: none;
+}
+.letters-guess{
+    margin: 10px auto;
+    background-color: #f8f8f8;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    min-height: 104px;
+    margin-bottom: 20px;
+}
+.letters-guess span{
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+    margin-right: 10px;
+    text-align: center;
+    line-height: 60px;
+    text-transform: uppercase;
+    font-weight: bold;
+    background-color: #fdfdfd;
+    border-bottom: var(--main-size) solid var(--main-color);
+    transition: 0.3s;
+}
+@media(max-width: 970px){
+    .letters-guess{
+        min-height: 60px;
+    }
+    .letters-guess span{
+        width: 40px;
+        height: 40px;
+        font-size: 24px;
+        line-height: 40px;
+    }
+}
+.game-over{
+    position: fixed;
+    background-color: #009688;
+    padding: 70px 20px;
+    width: 50%;
+    top: 19%;
+    left: 27%;
+    text-align: center;
+    font-size: 25px;
+    border: 1px solid #ccc;
+    color: #fff;
+}
+@media(max-width: 767px){
+    .game-over{
+        font-size: 18px;
+        padding: 70px 20px;
+        width: 80%;
+        top: 17%;
+        left: 12%;
+    }
+}
+.good-game{
+    position: fixed;
+    background-color: #009688;
+    padding: 70px 20px;
+    width: 50%;
+    top: 19%;
+    left: 27%;
+    text-align: center;
+    font-size: 25px;
+    border: 1px solid #ccc;
+    color: #fff;
+}
+@media(max-width: 767px){
+    .good-game{
+        font-size: 18px;
+        padding: 70px 20px;
+        width: 80%;
+        top: 17%;
+        left: 12%;
+    }
+}
+p.again{
+    position: fixed;
+    background-color: #009688;
+    padding: 10px 20px;
+    width: 12%;
+    top: 42%;
+    left: 47%;
+    text-align: center;
+    font-size: 18px;
+    border: 1px solid #ccc;
+    color: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+}
+@media(max-width: 767px){
+    p.again{
+        font-size: 14px;
+        padding: 10px 19px;
+        width: 18%;
+        top: 36%;
+        left: 43%;
+    }
+}
+p.next{
+    position: fixed;
+    background-color: #009688;
+    padding: 10px 20px;
+    width: 12%;
+    top: 42%;
+    left: 47%;
+    text-align: center;
+    font-size: 18px;
+    border: 1px solid #ccc;
+    color: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+}
+@media(max-width: 767px){
+    p.next{
+        font-size: 14px;
+        padding: 10px 19px;
+        width: 18%;
+        top: 36%;
+        left: 43%;
+    }
+}
+.footer{
+    width: 100%;
+    background-color: #009688;
+    display: flex;
+    justify-content: space-between;
+    align-items:  center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    color: white;
+}
+.footer .social{
+    margin-left: 50px;
+    font-size: 20px;
+    padding: 15px;
+}
+.footer .social .twitter{
+    background-color: #1da1f2;
+    padding: 10px;
+    transition: 1s;
+    cursor: pointer;
+    color: white;
+}
+.footer .social .twitter:hover{
+    background-color:  white;
+    color: #1da1f2;
+}
+.footer .social .instagram{
+    background-color: #e1306c;
+    margin-right: 10px;
+    margin-left: 10px;
+    padding: 10px;
+    transition: 1s;
+    cursor: pointer;
+    color: white;
+}
+.footer .social .instagram:hover{
+    background-color:  white;
+    color: #e1306c;
+}
+.footer .social .tiktok{
+    background-color: white;
+    padding: 10px;
+    transition: 1s;
+    cursor: pointer;
+    color: black;
+}
+.footer .social .tiktok:hover{
+    background-color: black;
+    color: white;
+}
+.footer .viwes{
+    margin-right: 50px;
+    font-size: 15px;
+    padding: 15px;
+}
+@media(max-width: 767px){
+    .footer .social{
+        margin-left: 10px;
+        font-size: 18px;
+    }
+    .footer .viwes{
+        margin-right: 10px;
+    }
+}
