@@ -21,6 +21,9 @@ lettersArray.forEach(letter => {
     lettersContainer.appendChild(span); 
 });
 
+// Select Letter By Letter
+let letterBoxs = document.querySelectorAll(".letter-box");
+
 // [5] Now We Will Create The That Has The Words & Gategories
 const words = {
     ide: ["php" , "javaScript" , "go" , "scala" , "fortran" , "r" , "my sql" , "python" , "html" , "css" , "java"],
@@ -72,35 +75,41 @@ let theWrongAttempts = 0;
 // [15] Select The Draw Element
 let theDraw = document.querySelector(".hangman-draw");
 
-// [11] Handle Clicking On Letters 
 
-lettersContainer.addEventListener("click", (e) => {
-    // [13] Set The Chose Status
-    let theStatus = false;
-    if(e.target.className === 'letter-box'){
-        e.target.classList.add("clicked");
-    }
-    // [A] Get Clicked Letter
-    let theClickedLetter = e.target.innerHTML.toLowerCase();
-    // [B] Get The Chosen Word
-    let theChosenWord = Array.from(randomValueValue.toLowerCase());
-    theChosenWord.forEach((wordLetter , wordIndex) => {
-        // [C] If The Clicked Letter Is The Simlier From One Of The Word Letters
-        if(theClickedLetter == wordLetter){
-            // [E] Change The Status To True
-            theStatus = true
-            // [D] Loop On All Guess Spans
+// [B] Get The Chosen Word
+let theChosenWord = Array.from(randomValueValue.toLowerCase());
+console.log(theChosenWord);
+
+// Ge
+let wordLength = theChosenWord.length;
+
+// 
+let count = 0;
+
+// [11] Handle Clicking On Letters 
+letterBoxs.forEach(letterBox => {
+    letterBox.addEventListener("click", (e) => {
+        // [13] Set The Chose Status
+        let theStatus = false;
+        // [A] Get Clicked Letter
+        let theClickedLetter = e.target.innerHTML.toLowerCase();
+        if(theChosenWord.includes(theClickedLetter)) {
             allGuessSpan.forEach((span , spanIndex) =>{
-                if(wordIndex === spanIndex){
+                if(theClickedLetter === theChosenWord[spanIndex]){
+                    count++;
                     span.innerHTML = theClickedLetter;
+                    success();
                 }
             })
+        }else {
+            draw();
         }
+        letterBox.style.pointerEvents = "none";
+        letterBox.style.backgroundColor = "#ccc";
+    })
 })
 
-// OutSide The Loop
-// [16] If Letter Is Wrong
-if(theStatus !== true){
+let draw = function() {
     theWrongAttempts++
     // Add Class Wrong On The Elements
     theDraw.classList.add(`wrong-${theWrongAttempts}`);
@@ -111,18 +120,15 @@ if(theStatus !== true){
         gameOver();
         lettersContainer.classList.add("finished");
     }
-}else{
+}
+let success = function() {
     // Play Success Sound
     document.getElementById("success").play();
     // Check if the game is successfully completed
-    allGuessSpan.forEach(chack => {
-        if(chack !== " "){
-            // goodGame();
-        }   
-    })
-    
+    if(count === wordLength) {
+        goodGame();
+    }
 }
-})
 
 // Game Over Function
 
@@ -161,7 +167,6 @@ function goodGame(){
     div.appendChild(divText);
     // Add Class To The Div
     div.className = "good-game";
-
     // Create The Next Button
     let p = document.createElement("p");
     // Create Text
@@ -170,8 +175,6 @@ function goodGame(){
     p.appendChild(pText);
     // Add Class To The Div
     p.className = "next";
-
-
     // Append The Div & P To The Body
     document.body.appendChild(div);
     document.body.appendChild(p);
