@@ -390,68 +390,16 @@ p.next{
         left: 43%;
     }
 }
-.footer{
-    width: 100%;
-    background-color: #009688;
-    display: flex;
-    justify-content: space-between;
-    align-items:  center;
+footer {
     position: absolute;
     bottom: 0;
-    left: 0;
-    color: white;
+    text-align: center;
+    background-color: #009688;
+    color: #fff;
+    padding: 20px 0;
+    width: 100%;
+    font-weight: bold;
 }
-.footer .social{
-    margin-left: 50px;
-    font-size: 20px;
-    padding: 15px;
-}
-.footer .social .twitter{
-    background-color: #1da1f2;
-    padding: 10px;
-    transition: 1s;
-    cursor: pointer;
-    color: white;
-}
-.footer .social .twitter:hover{
-    background-color:  white;
-    color: #1da1f2;
-}
-.footer .social .instagram{
-    background-color: #e1306c;
-    margin-right: 10px;
-    margin-left: 10px;
-    padding: 10px;
-    transition: 1s;
-    cursor: pointer;
-    color: white;
-}
-.footer .social .instagram:hover{
-    background-color:  white;
-    color: #e1306c;
-}
-.footer .social .tiktok{
-    background-color: white;
-    padding: 10px;
-    transition: 1s;
-    cursor: pointer;
-    color: black;
-}
-.footer .social .tiktok:hover{
-    background-color: black;
-    color: white;
-}
-.footer .viwes{
-    margin-right: 50px;
-    font-size: 15px;
-    padding: 15px;
-}
-@media(max-width: 767px){
-    .footer .social{
-        margin-left: 10px;
-        font-size: 18px;
-    }
-    .footer .viwes{
-        margin-right: 10px;
-    }
+footer span {
+    color: var(--main-color);
 }

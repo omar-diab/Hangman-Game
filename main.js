@@ -26,7 +26,7 @@ let letterBoxs = document.querySelectorAll(".letter-box");
 
 // [5] Now We Will Create The That Has The Words & Gategories
 const words = {
-    ide: ["php" , "javaScript" , "go" , "scala" , "fortran" , "r" , "my sql" , "python" , "html" , "css" , "java"],
+    progamming_languages: ["php" , "javaScript" , "go" , "scala" , "fortran" , "r" , "python" , "html" , "css" , "java"],
     movies: ["prestige" , "inception" , "parasite" , "interstelar" , "whiplash" , "Memento" , "coco" , "Up"],
     people: ["alberteinstein" , "hitchcock" , "alexander" , "cleopatra" , "mahatmaghandi" , "omardiab"],
     countries: ["syria" , "palestine" , "yeman" , "egypt" , "qatar" , "saudiarabia" , "jordan" , "lebanon"],
@@ -78,7 +78,6 @@ let theDraw = document.querySelector(".hangman-draw");
 
 // [B] Get The Chosen Word
 let theChosenWord = Array.from(randomValueValue.toLowerCase());
-console.log(theChosenWord);
 
 // Ge
 let wordLength = theChosenWord.length;
@@ -192,5 +191,3 @@ document.addEventListener("click", (n) => {
         location.reload();
     }
 });
-
-// How many person Used The Game
